@@ -24,4 +24,4 @@ This package implements a `MultiString` type which is a slice of strings. When t
 
 ## Status
 
-This is woefully incomplete, Fields it's known to not deal with properly are left as `json.RawMessage`. PRs with tests are welcome.
+This is woefully incomplete. Fields it's known to not deal with properly are left as `json.RawMessage`. PRs with tests are welcome.
