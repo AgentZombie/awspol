@@ -47,3 +47,15 @@ func (ms MultiString) MarshalJSON() ([]byte, error) {
 		return json.Marshal([]string(ms))
 	}
 }
+
+func (ms MultiString) ExactlyEquals(o MultiString) bool {
+	if len(ms) != len(o) {
+		return false
+	}
+	for i := range ms {
+		if ms[i] != o[i] {
+			return false
+		}
+	}
+	return true
+}

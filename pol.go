@@ -1,5 +1,7 @@
 package awspol
 
+// http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_grammar.html
+
 import (
 	"encoding/json"
 
@@ -8,52 +10,8 @@ import (
 
 type PolicyDocument struct {
 	Version   string           `json:",omitempty"`
+	ID        string           `json:"Id,omitempty"`
 	Statement []StatementEntry `json:",omitempty"`
-}
-
-type StatementEntry struct {
-	Sid       string          `json:",omitempty"`
-	Effect    string          `json:",omitempty"`
-	Principal json.RawMessage `json:",omitempty"`
-	Action    MultiString     `json:",omitempty"`
-	Resource  MultiString     `json:",omitempty"`
-}
-
-func (e StatementEntry) Equals(o StatementEntry) bool {
-	if e.Effect != o.Effect {
-		return false
-	}
-	if len(e.Resource) != len(o.Resource) {
-		return false
-	}
-	for _, eRes := range e.Resource {
-		matched := false
-		for _, oRes := range o.Resource {
-			if eRes == oRes {
-				matched = true
-				break
-			}
-		}
-		if !matched {
-			return false
-		}
-	}
-	if len(e.Action) != len(o.Action) {
-		return false
-	}
-	for _, eAct := range e.Action {
-		matched := false
-		for _, oAct := range o.Action {
-			if eAct == oAct {
-				matched = true
-				break
-			}
-		}
-		if !matched {
-			return false
-		}
-	}
-	return true
 }
 
 func (d PolicyDocument) Equals(o PolicyDocument) bool {
