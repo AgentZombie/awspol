@@ -22,39 +22,24 @@ type StatementEntry struct {
 	Resource  MultiString `json:",omitempty"`
 }
 
-func (e StatementEntry) Equals(o StatementEntry) bool {
+func (e StatementEntry) ExactlyEquals(o StatementEntry) bool {
 	if e.Effect != o.Effect {
 		return false
 	}
-	if len(e.Resource) != len(o.Resource) {
+	if e.Sid != o.Sid {
 		return false
 	}
-	for _, eRes := range e.Resource {
-		matched := false
-		for _, oRes := range o.Resource {
-			if eRes == oRes {
-				matched = true
-				break
-			}
-		}
-		if !matched {
-			return false
-		}
-	}
-	if len(e.Action) != len(o.Action) {
+	if !e.Resource.ExactlyEquals(o.Resource) {
 		return false
 	}
-	for _, eAct := range e.Action {
-		matched := false
-		for _, oAct := range o.Action {
-			if eAct == oAct {
-				matched = true
-				break
-			}
-		}
-		if !matched {
-			return false
-		}
+	if !e.Action.ExactlyEquals(o.Action) {
+		return false
+	}
+	if !e.Condition.SameContentsAs(o.Condition) {
+		return false
+	}
+	if !e.Principal.ExactlyEquals(*o.Principal) {
+		return false
 	}
 	return true
 }

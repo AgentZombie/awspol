@@ -24,7 +24,7 @@ func (d PolicyDocument) Equals(o PolicyDocument) bool {
 	for _, dStat := range d.Statement {
 		matched := false
 		for _, oStat := range o.Statement {
-			if dStat.Equals(oStat) {
+			if dStat.ExactlyEquals(oStat) {
 				matched = true
 				break
 			}
