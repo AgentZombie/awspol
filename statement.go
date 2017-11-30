@@ -14,12 +14,12 @@ const (
 )
 
 type StatementEntry struct {
-	ConditionJSON json.RawMessage `json:"Condition,omitempty"`
-	Sid           string          `json:",omitempty"`
-	Effect        string          `json:",omitempty"`
-	Principal     *Principal      `json:",omitempty"`
-	Action        MultiString     `json:",omitempty"`
-	Resource      MultiString     `json:",omitempty"`
+	Condition Condition   `json:",omitempty"`
+	Sid       string      `json:",omitempty"`
+	Effect    string      `json:",omitempty"`
+	Principal *Principal  `json:",omitempty"`
+	Action    MultiString `json:",omitempty"`
+	Resource  MultiString `json:",omitempty"`
 }
 
 func (e StatementEntry) Equals(o StatementEntry) bool {
@@ -60,13 +60,13 @@ func (e StatementEntry) Equals(o StatementEntry) bool {
 }
 
 type statementEntryJSON struct {
-	ConditionJSON json.RawMessage `json:"Condition,omitempty"`
-	Sid           string          `json:",omitempty"`
-	Effect        string          `json:",omitempty"`
-	Principal     *Principal      `json:",omitempty"`
-	NotPrincipal  *Principal      `json:",omitempty"`
-	Action        MultiString     `json:",omitempty"`
-	Resource      MultiString     `json:",omitempty"`
+	Condition    Condition   `json:",omitempty"`
+	Sid          string      `json:",omitempty"`
+	Effect       string      `json:",omitempty"`
+	Principal    *Principal  `json:",omitempty"`
+	NotPrincipal *Principal  `json:",omitempty"`
+	Action       MultiString `json:",omitempty"`
+	Resource     MultiString `json:",omitempty"`
 }
 
 func (e StatementEntry) MarshalJSON() ([]byte, error) {
