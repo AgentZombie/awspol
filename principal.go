@@ -55,7 +55,13 @@ func (p *Principal) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-func (p Principal) ExactlyEquals(o Principal) bool {
+func (p *Principal) ExactlyEquals(o *Principal) bool {
+	if p == o {
+		return true
+	}
+	if p == nil || o == nil {
+		return false
+	}
 	if p.Invert != o.Invert {
 		return false
 	}

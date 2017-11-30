@@ -38,7 +38,7 @@ func (e StatementEntry) ExactlyEquals(o StatementEntry) bool {
 	if !e.Condition.SameContentsAs(o.Condition) {
 		return false
 	}
-	if !e.Principal.ExactlyEquals(*o.Principal) {
+	if !e.Principal.ExactlyEquals(o.Principal) {
 		return false
 	}
 	return true

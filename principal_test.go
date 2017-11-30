@@ -52,7 +52,7 @@ func TestPrincipalExactlyEquals(t *testing.T) {
 			want: false,
 		},
 	} {
-		if got := tc.a.ExactlyEquals(tc.b); got != tc.want {
+		if got := tc.a.ExactlyEquals(&tc.b); got != tc.want {
 			t.Fatalf("got %v, want %v on %#v.ExactlyEquals(%#v)", got, tc.want, tc.a, tc.b)
 		}
 	}
@@ -74,7 +74,7 @@ func TestPrincipalJSONSymmetry(t *testing.T) {
 		if err != nil {
 			t.Fatalf("unexpected error marshaling original Principal: %q", err)
 		}
-		p2 := Principal{}
+		p2 := &Principal{}
 		err = json.Unmarshal(fstEnc, &p2)
 		if err != nil {
 			t.Fatalf("unexpected error unmarshaling first encoding: %q", err)
