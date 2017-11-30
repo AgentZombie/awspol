@@ -71,11 +71,11 @@ type statementEntryJSON struct {
 
 func (e StatementEntry) MarshalJSON() ([]byte, error) {
 	sej := statementEntryJSON{
-		ConditionJSON: e.ConditionJSON,
-		Sid:           e.Sid,
-		Effect:        e.Effect,
-		Action:        e.Action,
-		Resource:      e.Resource,
+		Condition: e.Condition,
+		Sid:       e.Sid,
+		Effect:    e.Effect,
+		Action:    e.Action,
+		Resource:  e.Resource,
 	}
 	if e.Principal != nil && e.Principal.Invert {
 		sej.NotPrincipal = e.Principal
@@ -93,7 +93,7 @@ func (e *StatementEntry) UnmarshalJSON(b []byte) error {
 	if sej.Principal != nil && sej.NotPrincipal != nil {
 		return errors.New("Statement cannot have both Principal and NotPrincipal")
 	}
-	e.ConditionJSON = sej.ConditionJSON
+	e.Condition = sej.Condition
 	e.Sid = sej.Sid
 	e.Effect = sej.Effect
 	e.Action = sej.Action
