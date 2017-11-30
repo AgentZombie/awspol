@@ -63,4 +63,30 @@ type CondOp struct {
 	Value MultiString
 }
 
+func (c CondOp) SameContentsAs(o CondOp) bool {
+	if c.Key != o.Key {
+		return false
+	}
+	if !c.Value.ExactlyEquals(o.Value) {
+		return false
+	}
+	return true
+}
+
 type Condition map[CondType]CondOp
+
+func (c Condition) SameContentsAs(o Condition) bool {
+	if len(c) != len(o) {
+		return false
+	}
+	for k, v := range c {
+		ov, ok := o[k]
+		if !ok {
+			return false
+		}
+		if !v.SameContentsAs(ov) {
+			return false
+		}
+	}
+	return true
+}
