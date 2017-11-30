@@ -8,6 +8,11 @@ import (
 	"github.com/pkg/errors"
 )
 
+const (
+	EffectAllow = "Allow"
+	EffectDeny  = "Deny"
+)
+
 type StatementEntry struct {
 	ConditionJSON json.RawMessage `json:"Condition,omitempty"`
 	Sid           string          `json:",omitempty"`
