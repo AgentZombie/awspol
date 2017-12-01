@@ -1,5 +1,11 @@
 package awspol
 
+import (
+	"encoding/json"
+
+	"github.com/pkg/errors"
+)
+
 const (
 	CondOpStringEquals                      CondType = "StringEquals"
 	CondOpStringNotEquals                            = "StringNotEquals"
@@ -61,6 +67,27 @@ type CondType string
 type CondOp struct {
 	Key   string
 	Value MultiString
+}
+
+func (c CondOp) MarshalJSON() ([]byte, error) {
+	return json.Marshal(map[string]MultiString{
+		c.Key: c.Value,
+	})
+}
+
+func (c *CondOp) UnmarshalJSON(b []byte) error {
+	m := map[string]MultiString{}
+	if err := json.Unmarshal(b, &m); err != nil {
+		return errors.Wrap(err, "unmarshalling CondOp")
+	}
+	if len(m) > 1 {
+		return errors.New("invalid CondOp")
+	}
+	for k, v := range m {
+		c.Key = k
+		c.Value = v
+	}
+	return nil
 }
 
 func (c CondOp) SameContentsAs(o CondOp) bool {
