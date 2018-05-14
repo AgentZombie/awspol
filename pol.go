@@ -46,7 +46,7 @@ func ParsePolicyDocument(s string) (PolicyDocument, error) {
 	return pd, nil
 }
 
-func ParsePolicyURLEncoded(s string) (PolicyDocument, error) {
+func ParsePolicyDocumentURLEncoded(s string) (PolicyDocument, error) {
 	unesc, err := url.PathUnescape(s)
 	if err != nil {
 		return PolicyDocument{}, errors.Wrap(err, "URL-decoding policy document")
