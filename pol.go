@@ -4,6 +4,7 @@ package awspol
 
 import (
 	"encoding/json"
+	"net/url"
 
 	"github.com/pkg/errors"
 )
@@ -43,4 +44,12 @@ func ParsePolicyDocument(s string) (PolicyDocument, error) {
 		return pd, errors.Wrap(err, "unmarshaling policy JSON")
 	}
 	return pd, nil
+}
+
+func ParsePolicyURLEncoded(s string) (PolicyDocument, error) {
+	unesc, err := url.PathUnescape(s)
+	if err != nil {
+		return PolicyDocument{}, errors.Wrap(err, "URL-decoding policy document")
+	}
+	return ParsePolicyDocument(unesc)
 }
