@@ -15,7 +15,7 @@ type PolicyDocument struct {
 	Statement []StatementEntry `json:",omitempty"`
 }
 
-func (d PolicyDocument) Equals(o PolicyDocument) bool {
+func (d PolicyDocument) ExactlyEquals(o PolicyDocument) bool {
 	if d.Version != o.Version {
 		return false
 	}
@@ -26,6 +26,28 @@ func (d PolicyDocument) Equals(o PolicyDocument) bool {
 		matched := false
 		for _, oStat := range o.Statement {
 			if dStat.ExactlyEquals(oStat) {
+				matched = true
+				break
+			}
+		}
+		if !matched {
+			return false
+		}
+	}
+	return true
+}
+
+func (d PolicyDocument) EquivalentTo(o PolicyDocument) bool {
+	if d.Version != o.Version {
+		return false
+	}
+	if len(d.Statement) != len(o.Statement) {
+		return false
+	}
+	for _, dStat := range d.Statement {
+		matched := false
+		for _, oStat := range o.Statement {
+			if dStat.EquivalentTo(oStat) {
 				matched = true
 				break
 			}

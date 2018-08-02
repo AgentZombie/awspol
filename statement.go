@@ -35,10 +35,32 @@ func (e StatementEntry) ExactlyEquals(o StatementEntry) bool {
 	if !e.Action.ExactlyEquals(o.Action) {
 		return false
 	}
-	if !e.Condition.SameContentsAs(o.Condition) {
+	if !e.Condition.ExactlyEquals(o.Condition) {
 		return false
 	}
 	if !e.Principal.ExactlyEquals(o.Principal) {
+		return false
+	}
+	return true
+}
+
+func (e StatementEntry) EquivalentTo(o StatementEntry) bool {
+	if e.Effect != o.Effect {
+		return false
+	}
+	if e.Sid != o.Sid {
+		return false
+	}
+	if !e.Resource.EquivalentTo(o.Resource) {
+		return false
+	}
+	if !e.Action.EquivalentTo(o.Action) {
+		return false
+	}
+	if !e.Condition.EquivalentTo(o.Condition) {
+		return false
+	}
+	if !e.Principal.EquivalentTo(o.Principal) {
 		return false
 	}
 	return true

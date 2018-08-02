@@ -79,3 +79,28 @@ func (p *Principal) ExactlyEquals(o *Principal) bool {
 	}
 	return true
 }
+
+func (p *Principal) EquivalentTo(o *Principal) bool {
+	if p == o {
+		return true
+	}
+	if p == nil || o == nil {
+		return false
+	}
+	if p.Invert != o.Invert {
+		return false
+	}
+	if p.All != o.All {
+		return false
+	}
+	if !p.AWS.EquivalentTo(o.AWS) {
+		return false
+	}
+	if !p.Federated.EquivalentTo(o.Federated) {
+		return false
+	}
+	if !p.Service.EquivalentTo(o.Service) {
+		return false
+	}
+	return true
+}

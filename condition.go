@@ -90,7 +90,17 @@ func (c *CondOp) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-func (c CondOp) SameContentsAs(o CondOp) bool {
+func (c CondOp) EquivalentTo(o CondOp) bool {
+	if c.Key != o.Key {
+		return false
+	}
+	if !c.Value.EquivalentTo(o.Value) {
+		return false
+	}
+	return true
+}
+
+func (c CondOp) ExactlyEquals(o CondOp) bool {
 	if c.Key != o.Key {
 		return false
 	}
@@ -102,7 +112,7 @@ func (c CondOp) SameContentsAs(o CondOp) bool {
 
 type Condition map[CondType]CondOp
 
-func (c Condition) SameContentsAs(o Condition) bool {
+func (c Condition) ExactlyEquals(o Condition) bool {
 	if len(c) != len(o) {
 		return false
 	}
@@ -111,7 +121,23 @@ func (c Condition) SameContentsAs(o Condition) bool {
 		if !ok {
 			return false
 		}
-		if !v.SameContentsAs(ov) {
+		if !v.ExactlyEquals(ov) {
+			return false
+		}
+	}
+	return true
+}
+
+func (c Condition) EquivalentTo(o Condition) bool {
+	if len(c) != len(o) {
+		return false
+	}
+	for k, v := range c {
+		ov, ok := o[k]
+		if !ok {
+			return false
+		}
+		if !v.EquivalentTo(ov) {
 			return false
 		}
 	}

@@ -59,3 +59,23 @@ func (ms MultiString) ExactlyEquals(o MultiString) bool {
 	}
 	return true
 }
+
+func (ms MultiString) EquivalentTo(o MultiString) bool {
+	msS := map[string]struct{}{}
+	oS := map[string]struct{}{}
+	for _, v := range ms {
+		msS[v] = struct{}{}
+	}
+	for _, v := range o {
+		oS[v] = struct{}{}
+	}
+	if len(msS) != len(oS) {
+		return false
+	}
+	for k := range msS {
+		if _, present := oS[k]; !present {
+			return false
+		}
+	}
+	return true
+}
