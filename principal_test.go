@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"testing"
+
+	"github.com/AgentZombie/multistring"
 )
 
 func TestPrincipalExactlyEquals(t *testing.T) {
@@ -16,12 +18,12 @@ func TestPrincipalExactlyEquals(t *testing.T) {
 			a: Principal{
 				Invert: true,
 				All:    false,
-				AWS:    MultiString{"a", "b", "c"},
+				AWS:    multistring.MultiString{"a", "b", "c"},
 			},
 			b: Principal{
 				Invert: true,
 				All:    false,
-				AWS:    MultiString{"a", "b", "c"},
+				AWS:    multistring.MultiString{"a", "b", "c"},
 			},
 			want: true,
 		},
@@ -29,12 +31,12 @@ func TestPrincipalExactlyEquals(t *testing.T) {
 			a: Principal{
 				Invert: true,
 				All:    false,
-				AWS:    MultiString{"a", "b", "c"},
+				AWS:    multistring.MultiString{"a", "b", "c"},
 			},
 			b: Principal{
 				Invert:  true,
 				All:     false,
-				Service: MultiString{"a", "b", "c"},
+				Service: multistring.MultiString{"a", "b", "c"},
 			},
 			want: false,
 		},
@@ -42,12 +44,12 @@ func TestPrincipalExactlyEquals(t *testing.T) {
 			a: Principal{
 				Invert: true,
 				All:    false,
-				AWS:    MultiString{"a", "b", "c"},
+				AWS:    multistring.MultiString{"a", "b", "c"},
 			},
 			b: Principal{
 				Invert: true,
 				All:    false,
-				AWS:    MultiString{"a", "c", "b"},
+				AWS:    multistring.MultiString{"a", "c", "b"},
 			},
 			want: false,
 		},
@@ -62,8 +64,8 @@ func TestPrincipalJSONSymmetry(t *testing.T) {
 	for _, tc := range []Principal{
 		Principal{
 			All:     false,
-			AWS:     MultiString{"a", "b", "c"},
-			Service: MultiString{"c"},
+			AWS:     multistring.MultiString{"a", "b", "c"},
+			Service: multistring.MultiString{"c"},
 		},
 		Principal{
 			All: true,

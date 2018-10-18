@@ -1,6 +1,10 @@
 package awspol
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/AgentZombie/multistring"
+)
 
 func TestConditionEquivalentTo(t *testing.T) {
 	for _, tc := range []struct {
@@ -14,13 +18,13 @@ func TestConditionEquivalentTo(t *testing.T) {
 			a: Condition{
 				CondOpStringEquals: CondOp{
 					Key:   "blarg",
-					Value: MultiString{"a", "b"},
+					Value: multistring.MultiString{"a", "b"},
 				},
 			},
 			b: Condition{
 				CondOpStringEquals: CondOp{
 					Key:   "blarg",
-					Value: MultiString{"a", "b"},
+					Value: multistring.MultiString{"a", "b"},
 				},
 			},
 			want: true,
@@ -30,13 +34,13 @@ func TestConditionEquivalentTo(t *testing.T) {
 			a: Condition{
 				CondOpStringNotEquals: CondOp{
 					Key:   "blarg",
-					Value: MultiString{"a", "b"},
+					Value: multistring.MultiString{"a", "b"},
 				},
 			},
 			b: Condition{
 				CondOpStringEquals: CondOp{
 					Key:   "blarg",
-					Value: MultiString{"a", "b"},
+					Value: multistring.MultiString{"a", "b"},
 				},
 			},
 			want: false,
@@ -46,13 +50,13 @@ func TestConditionEquivalentTo(t *testing.T) {
 			a: Condition{
 				CondOpStringEquals: CondOp{
 					Key:   "blarg",
-					Value: MultiString{"a", "b"},
+					Value: multistring.MultiString{"a", "b"},
 				},
 			},
 			b: Condition{
 				CondOpStringEquals: CondOp{
 					Key:   "foo",
-					Value: MultiString{"a", "b"},
+					Value: multistring.MultiString{"a", "b"},
 				},
 			},
 			want: false,
@@ -62,13 +66,13 @@ func TestConditionEquivalentTo(t *testing.T) {
 			a: Condition{
 				CondOpStringEquals: CondOp{
 					Key:   "blarg",
-					Value: MultiString{"a", "b"},
+					Value: multistring.MultiString{"a", "b"},
 				},
 			},
 			b: Condition{
 				CondOpStringEquals: CondOp{
 					Key:   "blarg",
-					Value: MultiString{"b", "a"},
+					Value: multistring.MultiString{"b", "a"},
 				},
 			},
 			want: true,

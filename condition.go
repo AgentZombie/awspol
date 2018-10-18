@@ -3,6 +3,7 @@ package awspol
 import (
 	"encoding/json"
 
+	"github.com/AgentZombie/multistring"
 	"github.com/pkg/errors"
 )
 
@@ -66,17 +67,17 @@ type CondType string
 
 type CondOp struct {
 	Key   string
-	Value MultiString
+	Value multistring.MultiString
 }
 
 func (c CondOp) MarshalJSON() ([]byte, error) {
-	return json.Marshal(map[string]MultiString{
+	return json.Marshal(map[string]multistring.MultiString{
 		c.Key: c.Value,
 	})
 }
 
 func (c *CondOp) UnmarshalJSON(b []byte) error {
-	m := map[string]MultiString{}
+	m := map[string]multistring.MultiString{}
 	if err := json.Unmarshal(b, &m); err != nil {
 		return errors.Wrap(err, "unmarshalling CondOp")
 	}

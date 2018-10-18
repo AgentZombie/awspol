@@ -5,6 +5,7 @@ package awspol
 import (
 	"encoding/json"
 
+	"github.com/AgentZombie/multistring"
 	"github.com/pkg/errors"
 )
 
@@ -14,12 +15,12 @@ const (
 )
 
 type StatementEntry struct {
-	Condition Condition   `json:",omitempty"`
-	Sid       string      `json:",omitempty"`
-	Effect    string      `json:",omitempty"`
-	Principal *Principal  `json:",omitempty"`
-	Action    MultiString `json:",omitempty"`
-	Resource  MultiString `json:",omitempty"`
+	Condition Condition               `json:",omitempty"`
+	Sid       string                  `json:",omitempty"`
+	Effect    string                  `json:",omitempty"`
+	Principal *Principal              `json:",omitempty"`
+	Action    multistring.MultiString `json:",omitempty"`
+	Resource  multistring.MultiString `json:",omitempty"`
 }
 
 func (e StatementEntry) ExactlyEquals(o StatementEntry) bool {
@@ -67,13 +68,13 @@ func (e StatementEntry) EquivalentTo(o StatementEntry) bool {
 }
 
 type statementEntryJSON struct {
-	Condition    Condition   `json:",omitempty"`
-	Sid          string      `json:",omitempty"`
-	Effect       string      `json:",omitempty"`
-	Principal    *Principal  `json:",omitempty"`
-	NotPrincipal *Principal  `json:",omitempty"`
-	Action       MultiString `json:",omitempty"`
-	Resource     MultiString `json:",omitempty"`
+	Condition    Condition               `json:",omitempty"`
+	Sid          string                  `json:",omitempty"`
+	Effect       string                  `json:",omitempty"`
+	Principal    *Principal              `json:",omitempty"`
+	NotPrincipal *Principal              `json:",omitempty"`
+	Action       multistring.MultiString `json:",omitempty"`
+	Resource     multistring.MultiString `json:",omitempty"`
 }
 
 func (e StatementEntry) MarshalJSON() ([]byte, error) {

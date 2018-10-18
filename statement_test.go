@@ -3,6 +3,8 @@ package awspol
 import (
 	"encoding/json"
 	"testing"
+
+	"github.com/AgentZombie/multistring"
 )
 
 func TestStatementEntryUnmarshal(t *testing.T) {
@@ -39,12 +41,12 @@ func TestStatementEntryUnmarshal(t *testing.T) {
 
 func TestStatementEntryMarshal(t *testing.T) {
 	for _, tc := range []struct {
-		in     MultiString
+		in     multistring.MultiString
 		expect string
 	}{
-		{in: MultiString{"res1", "res2"}, expect: `{"Resource":["res1","res2"]}`},
-		{in: MultiString{"res1"}, expect: `{"Resource":"res1"}`},
-		{in: MultiString{}, expect: `{}`},
+		{in: multistring.MultiString{"res1", "res2"}, expect: `{"Resource":["res1","res2"]}`},
+		{in: multistring.MultiString{"res1"}, expect: `{"Resource":"res1"}`},
+		{in: multistring.MultiString{}, expect: `{}`},
 		{in: nil, expect: `{}`},
 	} {
 		se := &StatementEntry{Resource: tc.in}

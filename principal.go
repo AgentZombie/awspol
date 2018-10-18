@@ -3,6 +3,7 @@ package awspol
 import (
 	"encoding/json"
 
+	"github.com/AgentZombie/multistring"
 	"github.com/pkg/errors"
 )
 
@@ -11,15 +12,15 @@ import (
 type Principal struct {
 	Invert    bool
 	All       bool
-	AWS       MultiString
-	Federated MultiString
-	Service   MultiString
+	AWS       multistring.MultiString
+	Federated multistring.MultiString
+	Service   multistring.MultiString
 }
 
 type principalJSON struct {
-	AWS       MultiString `json:",omitempty"`
-	Federated MultiString `json:",omitempty"`
-	Service   MultiString `json:",omitempty"`
+	AWS       multistring.MultiString `json:",omitempty"`
+	Federated multistring.MultiString `json:",omitempty"`
+	Service   multistring.MultiString `json:",omitempty"`
 }
 
 func (p Principal) MarshalJSON() ([]byte, error) {
