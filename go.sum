@@ -1,0 +1,6 @@
+github.com/AgentZombie/multistring v0.0.0-20181018223610-1906d6862571 h1:8IQKPAkp6K7L0MtCfNOC6D/DHZJpHZ7EfjNFbr6uFKs=
+github.com/AgentZombie/multistring v0.0.0-20181018223610-1906d6862571/go.mod h1:rSCflLAu3ikhDSny4PXwid60rEEn+IIqvbnDvBoZbDc=
+github.com/AgentZombie/multistring v0.1.0 h1:wPyr2zMxIZj7xgVy86ipO9+0KAYGOih+x5BK4sbRZPs=
+github.com/AgentZombie/multistring v0.1.0/go.mod h1:GkBkjbpAdP+rBb6HFu84pI2N4FY8r0Bs53UvM21F6j4=
+github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
+github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
